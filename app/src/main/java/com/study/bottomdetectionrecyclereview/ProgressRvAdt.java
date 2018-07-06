@@ -41,5 +41,7 @@ public class ProgressRvAdt<T> extends RecyclerView.Adapter {
 
     public void setLoadFinished(boolean loadFinished) {
         this.loadFinished = loadFinished;
+
     }
+
 }

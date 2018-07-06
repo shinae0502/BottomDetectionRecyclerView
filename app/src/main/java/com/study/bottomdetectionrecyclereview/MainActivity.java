@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.study.bottomdetectionrecyclereview.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     MyViewModel myViewModel;
@@ -20,14 +22,18 @@ public class MainActivity extends AppCompatActivity {
         myViewModel = new MyViewModel();
         myViewModel.setLayoutManager(new LinearLayoutManager(this));
         activityMainBinding.setViewModel(myViewModel);
+        myViewModel.requestData();
     }
 
 
-    @BindingAdapter({"app:adapter", "app:layoutManager", "app:onScrollChangeListener"})
+    @BindingAdapter({"app:adapter", "app:layoutManager", "app:onScrollChangeListener", "app:myData"})
     public static void bind(RecyclerView recyclerView
             , RvAdt rvAdt
             , RecyclerView.LayoutManager layoutManager
-            , RecyclerView.OnScrollListener onScrollListener) {
+            , RecyclerView.OnScrollListener onScrollListener
+            , ArrayList<MyData> myData
+    ) {
+        rvAdt.setMyData(myData);
         recyclerView.setAdapter(rvAdt);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.addOnScrollListener(onScrollListener);

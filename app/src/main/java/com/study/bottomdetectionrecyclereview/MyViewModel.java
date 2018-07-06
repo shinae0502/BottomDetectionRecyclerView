@@ -1,12 +1,32 @@
 package com.study.bottomdetectionrecyclereview;
 
-import android.arch.lifecycle.ViewModel;
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-public class MyViewModel extends ViewModel {
-    MyData myData;
+import java.util.ArrayList;
+
+public class MyViewModel extends BaseObservable {
+    ArrayList<MyData> myData;
+
+    public boolean isLast() {
+        return isLast;
+    }
+
+    public void setLast(boolean last) {
+        isLast = last;
+    }
+
     RvAdt rvAdt;
+
+
+    public RvAdt getRvAdt() {
+        return rvAdt;
+    }
+
     RecyclerView.LayoutManager layoutManager;
 
     boolean isLast;
@@ -19,10 +39,53 @@ public class MyViewModel extends ViewModel {
                 if (!recyclerView.canScrollVertically(1) && !isLast) {
                     isLast = true;
                     Log.d("sarang", "lAst");
+                    new Handler() {
+                        @Override
+                        public void handleMessage(Message msg) {
+                            super.handleMessage(msg);
+                            requestData();
+                        }
+                    }.sendEmptyMessageDelayed(0, 500);
                 }
             }
         };
     }
+
+    public void requestData() {
+        ArrayList newMyData = new ArrayList();
+        if (myData.size() < 100) {
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+
+        } else {
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+            newMyData.add(new MyData());
+        }
+
+        if (newMyData.size() < 10) {
+            rvAdt.setLoadFinished(true);
+        } else {
+            isLast = false;
+        }
+
+        myData.addAll(newMyData);
+        rvAdt.notifyDataSetChanged();
+
+
+    }
+
 
     public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
         this.layoutManager = layoutManager;
@@ -32,25 +95,23 @@ public class MyViewModel extends ViewModel {
         return layoutManager;
     }
 
-    public MyData getMyData() {
-        return myData;
-    }
-
-    public void setMyData(MyData myData) {
-        this.myData = myData;
-    }
-
-    public RvAdt getRvAdt() {
-        return rvAdt;
-    }
 
     public void setRvAdt(RvAdt rvAdt) {
         this.rvAdt = rvAdt;
     }
 
     public MyViewModel() {
-        myData = new MyData();
         rvAdt = new RvAdt();
+        this.myData = new ArrayList<>();
+    }
+
+    public ArrayList<MyData> getMyData() {
+        return myData;
+    }
+
+    @Bindable
+    public void setMyData(ArrayList<MyData> myData) {
+        this.myData = myData;
     }
 
 }

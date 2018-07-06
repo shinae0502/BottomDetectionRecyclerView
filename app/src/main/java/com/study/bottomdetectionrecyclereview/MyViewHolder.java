@@ -9,6 +9,10 @@ import com.study.bottomdetectionrecyclereview.databinding.ItemBinding;
 public class MyViewHolder extends RecyclerView.ViewHolder {
     ItemBinding itemBinding;
 
+    public void setMyData(MyData myData) {
+        itemBinding.setData(myData);
+    }
+
     public static MyViewHolder create(ViewGroup parent, int viewType) {
         return new MyViewHolder(
                 ItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false)

@@ -6,17 +6,18 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.study.bottomdetectionrecyclereview.MyViewModel" />
+            name="onScrollListener"
+            type="android.widget.AbsListView.OnScrollListener" />
+
+        <variable
+            name="rvAdt"
+            type="com.study.bottomdetectionrecyclereview.RvAdt" />
     </data>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:adapter="@{viewModel.rvAdt}"
-        app:layoutManager="@{viewModel.layoutManager}"
-        app:myData="@{viewModel.myData}"
-        app:onScrollChangeListener="@{viewModel.onScrollListener}">
+        android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
 </layout>

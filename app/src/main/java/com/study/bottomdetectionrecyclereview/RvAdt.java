@@ -22,9 +22,7 @@ public class RvAdt extends ProgressRvAdt<RecyclerView.ViewHolder> {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_PROGRESS)
-            return ProgressHolder.create(parent, viewType);
-
+        super.onCreateViewHolder(parent, viewType);
         return MyViewHolder.create(parent, viewType);
     }
 

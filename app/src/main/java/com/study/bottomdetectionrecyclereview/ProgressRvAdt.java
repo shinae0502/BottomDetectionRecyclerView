@@ -22,7 +22,8 @@ public class ProgressRvAdt<T> extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        if (viewType == VIEW_TYPE_PROGRESS)
+            return ProgressHolder.create(parent, viewType);
     }
 
     @Override
